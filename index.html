@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eni | Report di Sostenibilità 2024</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Definizione palette colori Eni e variabili di layout */
+        :root {
+            --eni-yellow: #ffda00;
+            --eni-dark: #1a1a1b;
+            --accent-blue: #005a8c;
+            --soft-white: #f8f9fa;
+        }
+
+        /* Reset margini e box-sizing per gestione corretta degli ingombri */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--soft-white);
+            color: var(--eni-dark);
+            line-height: 1.6;
+        }
+
+        /* Navigazione: fissata in alto (sticky) con leggero blur */
+        nav {
+            padding: 20px 8%;
+            background: rgba(255,255,255,0.95);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #eee;
+        }
+        .logo { height: 35px; }
+        .nav-links {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            color: #777;
+            text-transform: uppercase;
+        }
+
+        /* Hero Section: Immagine di copertina con effetto overlay scuro */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('sustainability.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Leggero effetto parallasse nello scroll */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .hero-box {
+            text-align: center;
+            max-width: 1000px;
+            padding: 0 20px;
+        }
+        .hero-box h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem); /* Testo fluido per adattarsi ai vari schermi */
+            font-weight: 900;
+            line-height: 0.95;
+            margin-bottom: 25px;
+        }
+        .hero-box h1 span { color: var(--eni-yellow); }
+
+        /* Griglia KPI: i box bianchi che "galleggiano" sopra la hero */
+        .kpi-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: -60px auto 60px;
+            padding: 0 20px;
+        }
+        .kpi-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            border-bottom: 4px solid var(--eni-yellow);
+        }
+        .kpi-card span {
+            display: block;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--accent-blue);
+        }
+        .kpi-card p {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        /* Layout principale: Colonna testo (articolo) e colonna laterale (sidebar) */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto 100px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 60px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            font-family: 'Playfair Display', serif;
+        }
+        h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin: 40px 0 20px;
+            color: var(--accent-blue);
+        }
+        .section-text {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: #444;
+            margin-bottom: 40px;
+        }
+
+        /* Card evidenziata per l'introduzione */
+        .about-box {
+            background: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            border-left: 8px solid var(--eni-yellow);
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+
+        /* Contenitore per immagini nel corpo del testo */
+        .feature-box {
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 40px 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .feature-box img { width: 100%; display: block; }
+
+        /* Sidebar: posizionata in sticky per rimanere visibile durante lo scroll */
+        .report-download {
+            background: var(--eni-dark);
+            color: white;
+            padding: 50px 40px;
+            border-radius: 30px;
+            position: sticky;
+            top: 120px;
+        }
+        .report-download h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        .report-download p {
+            font-weight: 300;
+            opacity: 0.85;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        /* Pulsante con stile bold */
+        .btn-main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--eni-yellow);
+            color: var(--eni-dark);
+            padding: 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        footer {
+            background: #fff;
+            padding: 80px 20px;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+
+        /* Gestione responsive: passaggio a colonna singola su schermi piccoli */
+        @media (max-width: 900px) {
+            .container { grid-template-columns: 1fr; }
+            .hero-box h1 { font-size: 3rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <img src="eni-logo.png" alt="Eni Logo" class="logo">
+    <div class="nav-links">Eni | Sustainability Report</div>
+</nav>
+
+<section class="hero">
+    <div class="hero-box">
+        <p style="text-transform: uppercase; letter-spacing: 4px; font-weight: 300;">
+            Analisi delle strategie di sostenibilità e gestione delle risorse naturali
+        </p>
+        <h1>Eni for <br><span>2024 Sustainability Report</span></h1>
+    </div>
+</section>
+
+<section class="kpi-section">
+    <div class="kpi-card">
+        <span>-55%</span>
+        <p>Riduzione emissioni Upstream (Scope 1+2)</p>
+    </div>
+    <div class="kpi-card">
+        <span>90%</span>
+        <p>Riutilizzo delle acque dolci</p>
+    </div>
+    <div class="kpi-card">
+        <span>10.244</span>
+        <p>Brevetti attivi</p>
+    </div>
+</section>
+
+<p style="max-width:1200px;margin:0 auto 80px;padding:0 20px;font-size:0.85rem;color:#666;">
+    Gli indicatori presentati sono selezionati e rielaborati sulla base dei dati contenuti nel
+    Report di Sostenibilità Eni for 2024, con l’obiettivo di rappresentare in forma sintetica
+    alcune delle principali dimensioni ambientali e tecnologiche della strategia di sostenibilità
+    dell’azienda.
+</p>
+
+<main class="container">
+    <article>
+        <div class="about-box">
+            <h2>Eni e il settore primario</h2>
+            <p class="section-text">
+                Eni è un’impresa energetica integrata che opera lungo l’intera catena del valore dell’energia,
+                includendo attività riconducibili al settore primario quali l’esplorazione, l’estrazione e
+                la gestione delle risorse naturali. L’analisi del Report di Sostenibilità “Eni for 2024”
+                evidenzia come tali attività siano inserite in una strategia complessiva orientata alla
+                transizione energetica, nella quale la riduzione dell’impatto ambientale delle operazioni
+                industriali rappresenta un elemento centrale.
+            </p>
+        </div>
+
+        <h2>Attività industriali e sostenibilità</h2>
+        <p class="section-text">
+            Il Report di Sostenibilità Eni for 2024 analizza il rapporto tra le attività industriali
+            dell’azienda e i contesti ambientali e sociali in cui essa opera, con particolare attenzione
+            alla tutela degli ecosistemi, al monitoraggio ambientale e alla gestione sostenibile delle
+            risorse naturali.
+        </p>
+
+        <div class="feature-box">
+            <img src="hero-energy.jpg" alt="Strategie di sostenibilità Eni">
+        </div>
+
+        <h3>Sostenibilità e catena del valore</h3>
+        <p>
+            Un elemento centrale del Report di Sostenibilità è rappresentato dall’approccio adottato lungo
+            l’intera catena del valore. L’azienda promuove l’integrazione di criteri ambientali e sociali nei
+            processi produttivi e di approvvigionamento, coinvolgendo fornitori e partner in un percorso
+            condiviso di crescita sostenibile.
+        </p>
+    </article>
+
+    <aside>
+        <div class="report-download">
+            <div style="background: var(--eni-yellow); color: var(--eni-dark);
+                        display:inline-block; padding:4px 12px; border-radius:4px;
+                        font-size:0.7rem; font-weight:900; margin-bottom:15px;">
+                PDF UFFICIALE
+            </div>
+            <h3>Report di Sostenibilità 2024</h3>
+            <p>
+                Documento ufficiale utilizzato come fonte primaria per l’analisi dei contenuti presentati
+                nella pagina.
+            </p>
+            <a href="ENI_Sustainability_Report_2024.pdf" class="btn-main" download>
+                Scarica documento
+            </a>
+        </div>
+    </aside>
+</main>
+
+<footer>
+    <p style="font-size:0.9rem; font-weight:500; color:#555;">
+        Corso di Studi in Informatica per le Aziende Digitali (L-31)
+    </p>
+    <p style="font-size:0.85rem; font-weight:300; color:#777; margin-top:6px;">
+        Tecnologia Web per la Sostenibilità d’Impresa – Project Work 17
+    </p>
+    <p style="font-size:0.8rem; font-weight:300; color:#999; margin-top:14px;">
+        Progetto d’esame realizzato da <strong>Miriana Infantino</strong>
+    </p>
+</footer>
+
+</body>
+</html>
